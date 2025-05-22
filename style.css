@@ -231,8 +231,8 @@ body {
     box-shadow: 0 2px 16px 0 rgba(255, 126, 179, 0.10);
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
+    align-items: stretch;
+    position: relative;
     padding: 24px 12px 12px 12px;
     text-align: center;
     font-size: 1.2rem;
@@ -241,7 +241,6 @@ body {
     backface-visibility: hidden;
     animation: cardReveal 1.2s cubic-bezier(.68,-0.55,.27,1.55) both;
     border: 2px dashed #ff7eb3;
-    position: relative;
     overflow: hidden;
 }
 .card-inside::before {
@@ -273,20 +272,8 @@ body {
 .box-image img{
     width: 100%;
 }
-.close-area {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 100px;
-    height: 48px;
-    z-index: 3;
-    display: flex;
-    align-items: flex-start;
-    justify-content: flex-end;
-    cursor: pointer;
-    background: transparent;
-}
 .close-btn {
+    align-self: flex-end;
     margin-top: 10px;
     margin-right: 14px;
     background: #ff7eb3;
