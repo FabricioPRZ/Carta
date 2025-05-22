@@ -10,7 +10,7 @@ window.addEventListener('DOMContentLoaded', () => {
     });
 
     //Cerrar el sobre
-    document.querySelector('.closeBtn').addEventListener('click', function() {
+    document.querySelector('.close-btn').addEventListener('click', function() {
         document.getElementById('card').classList.remove('show');
         setTimeout(() => {
             document.getElementById('envelope').style.opacity = '1';
