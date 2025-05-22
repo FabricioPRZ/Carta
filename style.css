@@ -1,0 +1,377 @@
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #ffe6f0 0%, #fff0f5 100%);
+    overflow: hidden;
+    font-family: 'Segoe UI', cursive, sans-serif;
+}
+
+/* Flores animadas de fondo */
+.background-flowers {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 0;
+}
+.background-flowers::before, .background-flowers::after {
+    content: '';
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    background: url('rosas.png') no-repeat center/contain;
+    opacity: 0.15;
+    animation: floatFlowers 18s linear infinite alternate;
+}
+.background-flowers::after {
+    left: 80vw;
+    top: 60vh;
+    animation-delay: 6s;
+}
+.background-flowers::before {
+    left: 10vw;
+    top: 10vh;
+    animation-delay: 0s;
+}
+/* Más flores */
+.background-flowers::marker,
+.background-flowers span {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    background: url('tulipanes.webp') no-repeat center/contain;
+    opacity: 0.10;
+    pointer-events: none;
+}
+.background-flowers span.f1 { left: 30vw; top: 70vh; animation: floatFlowers 14s linear infinite alternate-reverse; }
+.background-flowers span.f2 { left: 60vw; top: 20vh; animation: floatFlowers 20s linear infinite alternate; }
+.background-flowers span.f3 { left: 50vw; top: 50vh; animation: floatFlowers 16s linear infinite alternate-reverse; }
+
+@keyframes floatFlowers {
+    0% { transform: translateY(0) rotate(0deg);}
+    100% { transform: translateY(-60px) rotate(15deg);}
+}
+
+/* Corazones animados */
+.hearts {
+    position: fixed;
+    left: 0; top: 0; width: 100vw; height: 100vh;
+    pointer-events: none;
+    z-index: 1;
+}
+.hearts::before, .hearts::after {
+    content: "💖";
+    position: absolute;
+    font-size: 2.5rem;
+    opacity: 0.7;
+    animation: floatHearts 8s linear infinite;
+}
+.hearts::before {
+    left: 20vw; top: 80vh;
+    animation-delay: 0s;
+}
+.hearts::after {
+    left: 70vw; top: 85vh;
+    animation-delay: 3s;
+}
+/* Más corazones */
+.hearts span {
+    position: absolute;
+    font-size: 2.2rem;
+    opacity: 0.5;
+    animation: floatHearts 10s linear infinite;
+}
+.hearts span.h1 { left: 10vw; top: 90vh; animation-delay: 2s;}
+.hearts span.h2 { left: 80vw; top: 95vh; animation-delay: 5s;}
+.hearts span.h3 { left: 40vw; top: 85vh; animation-delay: 1s;}
+@keyframes floatHearts {
+    0% { transform: translateY(0) scale(1);}
+    100% { transform: translateY(-80vh) scale(1.3);}
+}
+
+/* Kuromi */
+.kuromi {
+    position: fixed;
+    right: 2vw;
+    bottom: 2vw;
+    z-index: 2;
+    width: 120px;
+    opacity: 0.95;
+    animation: tada 2s 1, kuromiBounce 3s infinite alternate;
+}
+.kuromi img {
+    width: 100%;
+    filter: drop-shadow(0 0 10px #ffb6d5);
+}
+@keyframes kuromiBounce {
+    0% { transform: translateY(0);}
+    100% { transform: translateY(-20px);}
+}
+
+/* Sobre animado */
+.card-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    z-index: 3;
+    position: relative;
+    animation: fadeInDown 1.5s both;
+}
+.envelope {
+    width: 340px;
+    height: 220px;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    z-index: 4;
+    transition: opacity 0.7s;
+    animation: bounceIn 1.2s;
+}
+.envelope-flap {
+    width: 340px;
+    height: 110px;
+    background: linear-gradient(135deg, #fff0f7 80%, #ffb6d5 100%);
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-top-left-radius: 24px 60px;
+    border-top-right-radius: 24px 60px;
+    border-bottom: 2px solid #ffb6d5;
+    transform-origin: top center;
+    transition: transform 1s cubic-bezier(.68,-0.55,.27,1.55);
+    z-index: 2;
+}
+.envelope.open .envelope-flap {
+    transform: rotateX(-120deg);
+}
+.envelope-body {
+    width: 340px;
+    height: 110px;
+    background: #fff0f7;
+    border-bottom-left-radius: 24px 60px;
+    border-bottom-right-radius: 24px 60px;
+    border: 2px solid #ffb6d5;
+    border-top: none;
+    position: absolute;
+    top: 110px;
+    left: 0;
+    z-index: 1;
+}
+.envelope-heart {
+    position: absolute;
+    top: 90px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 2.5rem;
+    z-index: 3;
+    animation: envelopeShake 2s infinite;
+}
+@keyframes envelopeShake {
+    0%, 100% { transform: translateX(-50%) rotate(-5deg);}
+    50% { transform: translateX(-50%) rotate(5deg);}
+}
+#openBtn {
+    margin-bottom: 18px;
+    padding: 12px 32px;
+    font-size: 1.2rem;
+    background: linear-gradient(90deg, #ffb6d5, #ff69b4);
+    color: #fff;
+    border: none;
+    border-radius: 24px;
+    cursor: pointer;
+    box-shadow: 0 2px 8px #ffb6d5aa;
+    transition: background 0.3s;
+    z-index: 5;
+    position: relative;
+}
+#openBtn:hover {
+    background: linear-gradient(90deg, #ff69b4, #ffb6d5);
+    transform: scale(1.07);
+}
+
+/* Carta animada */
+.card {
+    width: 360px;
+    height: 240px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%) scale(0.97) rotateX(30deg);
+    background: linear-gradient(135deg, #a259c6 60%, #ff7eb3 100%);
+    border-radius: 22px;
+    box-shadow: 0 12px 40px 0 rgba(162, 89, 198, 0.25), 0 2px 8px #ffb6d5aa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    border: 4px solid #fff;
+    transition: 
+        transform 1.2s cubic-bezier(.68,-0.55,.27,1.55),
+        opacity 0.7s;
+    z-index: 3;
+}
+.card.show {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translate(-50%, -50%) scale(1.04) rotateX(0deg);
+    transition-delay: 0.7s;
+    animation: heartBeat 1.2s;
+}
+.card-inside {
+    width: 96%;
+    height: 92%;
+    border-radius: 16px;
+    font-family: "Merriweather Sans", sans-serif;
+    background: linear-gradient(135deg, #fff 80%, #ffe6fa 100%);
+    box-shadow: 0 2px 16px 0 rgba(255, 126, 179, 0.10);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 24px 12px 12px 12px;
+    text-align: center;
+    font-size: 1.2rem;
+    color: #a259c6;
+    z-index: 1;
+    backface-visibility: hidden;
+    animation: cardReveal 1.2s cubic-bezier(.68,-0.55,.27,1.55) both;
+    border: 2px dashed #ff7eb3;
+    position: relative;
+    overflow: hidden;
+}
+.card-inside::before {
+    content: "";
+    position: absolute;
+    top: -30px; left: -30px;
+    width: 80px; height: 80px;
+    background: url('https://cdn-icons-png.flaticon.com/512/833/833472.png') no-repeat center/contain;
+    opacity: 0.13;
+    z-index: 0;
+}
+.card-inside::after {
+    content: "";
+    position: absolute;
+    bottom: -30px; right: -30px;
+    width: 80px; height: 80px;
+    background: url('rosas.png') no-repeat center/contain;
+    opacity: 0.10;
+    z-index: 0;
+}
+.card-inside > * {
+    position: relative;
+    z-index: 1;
+}
+.box-image{
+    max-width: 500px;
+    height: auto;
+}
+.box-image img{
+    width: 100%;
+}
+.close-area {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100px;
+    height: 48px;
+    z-index: 3;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-end;
+    cursor: pointer;
+    background: transparent;
+}
+.close-btn {
+    margin-top: 10px;
+    margin-right: 14px;
+    background: #ff7eb3;
+    color: #fff;
+    border: none;
+    border-radius: 16px;
+    padding: 10px 24px;
+    font-size: 1rem;
+    cursor: pointer;
+    z-index: 4;
+    box-shadow: 0 2px 8px #ffb6d5aa;
+    transition: background 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 70px;
+    min-height: 36px;
+}
+.close-btn:hover {
+    background: #a259c6;
+}
+.content-scroll {
+    flex: 1 1 auto;
+    min-height: 0;
+    max-height: 100%;
+    overflow-y: auto;
+    margin-top: 16px;
+    padding-right: 6px;
+    width: 100%;
+    text-align: left;
+}
+
+#particles-js {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    z-index: 0;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+}
+
+/* Responsive Design para la carta y elementos principales */
+@media (max-width: 600px) {
+    .card-container {
+        height: 100dvh;
+        min-height: 100dvh;
+    }
+
+    .card {
+        width: 96vw;
+        min-width: 0;
+        max-width: 98vw;
+        height: 54vw;
+        max-height: 70vw;
+        min-height: 220px;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+    }
+    
+    .card-inside {
+        padding: 12px 4px 4px 4px;
+        font-size: 1rem;
+    }
+    .kuromi {
+        width: 70px;
+        right: 2vw;
+        bottom: 2vw;
+    }
+}
+
+/* Ajustes para pantallas muy pequeñas */
+@media (max-width: 400px) {
+    .card {
+        width: 98vw;
+        height: 60vw;
+        min-height: 160px;
+    }
+    .card-inside {
+        font-size: 0.95rem;
+        padding: 8px 2px;
+    }
+    .content-scroll {
+        max-height: 60px;
+        font-size: 0.95rem;
+    }
+}
